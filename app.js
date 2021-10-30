@@ -6,7 +6,6 @@ const getWheather = async () => {
     const currentTime = document.querySelector(".current-time");
 
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=85d9877a19499d8c389f1fb40ddcbdb4`);
-    
 
     if(response.ok){
         let wheather = await response.json();
@@ -39,19 +38,9 @@ const getCorrectWind = (wind) => {
     
 }
 
-
-
 getWheather()
-let a = 5;
-switch (a) {
-    case a>2:
-      alert( 'Один или ноль' );
-      break;
-  
-    case a<2:
-      alert( 'Два' );
-      break;
-  
-    default:
-      alert( 'Неизвестное значение' );
-  }
+
+document.querySelector(".get-weather").addEventListener("click", () => {
+    currentCity = document.querySelector(".city-input").value;
+    getWheather();
+})
