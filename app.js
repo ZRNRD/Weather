@@ -1,6 +1,7 @@
 let currentCity = localStorage.getItem("currentCity") || 'Москва';
 
 const getWheather = async () => {
+    const cityName = document.querySelector(".city-name");
     const temperature = document.querySelector(".temperature");
     const currentTime = document.querySelector(".current-time");
 
@@ -11,21 +12,15 @@ const getWheather = async () => {
         let wheather = await response.json();
         let currentTemperature = (wheather.main.temp -273.15).toFixed(1);
 
-        temperature.innerText = getTemperature(currentTemperature);
+        cityName.innerText = currentCity;
+        temperature.innerText = getCorrectTemperature(currentTemperature);
         currentTime.innerText = "Сейчас " + getCurrentTime();
-
+        localStorage.setItem("currentCity", currentCity);
+    }else{
+        alert("Ошибка запроса погоды");
     }
-
     
 
-}
-
-const getTemperature = (temperature) => {
-    if(temperature > 0){
-        return "+" + temperature + "°C"
-    }else{
-        return temperature + "°C"
-    }
 }
 
 const getCurrentTime = () => {
@@ -33,4 +28,30 @@ const getCurrentTime = () => {
     return date.getHours() + ":" + date.getMinutes();
 }
 
+const getCorrectTemperature = (temperature) => {
+    if(temperature > 0){
+        return "+" + temperature + "°C"
+    }else{
+        return temperature + "°C"
+    }
+}
+const getCorrectWind = (wind) => {
+    
+}
+
+
+
 getWheather()
+let a = 5;
+switch (a) {
+    case a>2:
+      alert( 'Один или ноль' );
+      break;
+  
+    case a<2:
+      alert( 'Два' );
+      break;
+  
+    default:
+      alert( 'Неизвестное значение' );
+  }

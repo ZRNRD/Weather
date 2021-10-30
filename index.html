@@ -8,24 +8,33 @@
 <body>
 
     <div class="container">
+        <!-- weather -->
         <div class="weather">
+            <!-- .weather__show -->
             <div class="weather__show">
                 <h1 class="city-name">Тюмень</h1>
                 <p class="current-time">Сейчас 20:29</p>
                 <div class="current-weather">
-                    <p class="temperature">+4°C</p>
-                    <img class="wheather-icon" src="./img/Weather/cloud-moon-solid.svg" alt="wheather-icon"/>
+                    <div class="current-weather__top">
+                        <p class="temperature">+4°C</p>
+                        <img class="wheather-icon" src="./img/Weather/cloud-moon-solid.svg" alt="wheather-icon"/>
+                        <p class="description">Снежно</p>
+                    </div>
+                    <div class="current-weather__bottom">
+                        <p class="wind">3,4 м/с, ЮЗ</p>
+                        <p class="humidity">88%</p>
+                        <p class="pressure">750 мм рт. ст.</p>
+                    </div>
                     
                 </div>
-            </div>
+            </div><!-- /.weather__show -->
+
             <div class="weather__get">
                 <h2>Введите город</h2>
                 <input type="text" class="city">
                 <button class="getWeather">Запросить погоду</button>
             </div>
-            
-
-        </div>
+        </div><!-- /.weather -->
     </div>
 
 <script src="app.js"></script>
