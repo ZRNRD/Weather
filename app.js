@@ -28,13 +28,17 @@ const getWheather = async () => {
         document.querySelector(".city-input").value = "";
     }else{
         alert("Ошибка запроса погоды");
+        document.querySelector(".city-input").value = "";
     }
 }
 
 // Вспомогательные функции
 const getCurrentTime = () => {
     const date = new Date();
-    return date.getHours() + ":" + date.getMinutes();
+    const hours = date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
+    const minutes = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
+    
+    return hours + ":" + minutes;
 }
 
 const getCorrectTemperature = (temperature) => {
