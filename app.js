@@ -7,6 +7,7 @@ const getWheather = async () => {
     const currentTime = document.querySelector(".current-time");
     const wind = document.querySelector(".wind");
     const humidity = document.querySelector(".humidity");
+    const pressure = document.querySelector(".pressure");
 
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=85d9877a19499d8c389f1fb40ddcbdb4`);
 
@@ -17,9 +18,14 @@ const getWheather = async () => {
         cityName.innerText = currentCity;
         temperature.innerText = getCorrectTemperature(currentTemperature);
         currentTime.innerText = "Сейчас " + getCurrentTime();
+
         wind.innerText = getCorrectWind(wheather.wind);
         humidity.innerText = wheather.main.humidity + "%";
+        pressure.innerText = getCorrectPressure(wheather.main.pressure);
+
         localStorage.setItem("currentCity", currentCity);
+
+        document.querySelector(".city-input").value = "";
     }else{
         alert("Ошибка запроса погоды");
     }
@@ -57,6 +63,10 @@ const getCorrectWind = ({speed, deg}) => {
     }else{
         return speed + " м/с, CЗ" 
     }
+}
+
+const getCorrectPressure = (pressure) => {
+    return Math.round(pressure / 1.333) + " мм рт. ст."
 }
 
 // Повесить функцию на событие "после полной загрузки документа"
