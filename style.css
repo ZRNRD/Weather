@@ -9,6 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url("./img/clouds-bg.jpg") no-repeat;
+    background-size: 100%;
 }
 /* weather__show */
 .weather{
@@ -17,8 +19,8 @@
     padding: 0 20px;
     width: 50%;
     border-radius: 15px;
-    background: url("./img/clouds-bg.jpg") no-repeat;
-    background-size: 100%;
+    background-color: rgba(25, 0, 255, 0.2);
+    
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
 .temperature{
@@ -27,6 +29,7 @@
 }
 .current-weather > div{
     display: flex;
+    margin-top: 5px;
 }
 .current-weather > div *{
     margin-right:  5px;
