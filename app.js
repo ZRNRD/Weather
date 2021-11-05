@@ -15,12 +15,12 @@ const getWheather = async () => {
         let wheather = await response.json();
         let currentTemperature = (wheather.main.temp -273.15).toFixed(1);
 
-        cityName.innerText = currentCity;
+        cityName.innerText = getCorrectCityName(currentCity);
         temperature.innerText = getCorrectTemperature(currentTemperature);
         currentTime.innerText = "Сейчас " + getCurrentTime();
 
         wind.innerText = getCorrectWind(wheather.wind);
-        humidity.innerText = wheather.main.humidity + "%";
+        humidity.innerText = "Влажность: " + wheather.main.humidity + "%";
         pressure.innerText = getCorrectPressure(wheather.main.pressure);
 
         localStorage.setItem("currentCity", currentCity);
@@ -33,11 +33,15 @@ const getWheather = async () => {
 }
 
 // Вспомогательные функции
+const getCorrectCityName = (cityName) => {
+    return cityName.split(" ").map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
+}
+
 const getCurrentTime = () => {
     const date = new Date();
     const hours = date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
     const minutes = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
-    
+
     return hours + ":" + minutes;
 }
 
@@ -51,26 +55,26 @@ const getCorrectTemperature = (temperature) => {
 
 const getCorrectWind = ({speed, deg}) => {
     if(deg >= 335 && deg <= 25){
-        return speed + " м/с, C" 
+        return "Ветер: " + speed + " м/с, C" 
     }else if(deg > 25 && deg < 65){
-        return speed + " м/с, CВ" 
+        return "Ветер: " + speed + " м/с, CВ" 
     }else if(deg >= 65 && deg <= 115){
-        return speed + " м/с, В" 
+        return "Ветер: " + speed + " м/с, В" 
     }else if(deg > 115 && deg < 155){
-        return speed + " м/с, ЮВ" 
+        return "Ветер: " + speed + " м/с, ЮВ" 
     }else if(deg >= 155 && deg <= 205){
-        return speed + " м/с, Ю" 
+        return "Ветер: " + speed + " м/с, Ю" 
     }else if(deg > 205 && deg < 245){
-        return speed + " м/с, ЮЗ" 
+        return "Ветер: " + speed + " м/с, ЮЗ" 
     }else if(deg >= 245 && deg <= 295){
-        return speed + " м/с, З" 
+        return "Ветер: " + speed + " м/с, З" 
     }else{
-        return speed + " м/с, CЗ" 
+        return "Ветер: " + speed + " м/с, CЗ" 
     }
 }
 
 const getCorrectPressure = (pressure) => {
-    return Math.round(pressure / 1.333) + " мм рт. ст."
+    return "Давление: " + Math.round(pressure / 1.333) + " мм рт. ст."
 }
 
 // Повесить функцию на событие "после полной загрузки документа"
@@ -79,4 +83,11 @@ getWheather()
 document.querySelector(".get-weather").addEventListener("click", () => {
     currentCity = document.querySelector(".city-input").value;
     getWheather();
+})
+
+document.querySelector(".city-input").addEventListener("keydown", (e) => {
+    if(e.keyCode === 13){
+        currentCity = e.target.value;
+        getWheather();
+    }
 })
