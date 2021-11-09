@@ -1,7 +1,7 @@
 let currentCity = localStorage.getItem("currentCity") || 'Москва';
 
 // Основная функция запроса погоды
-const getWheather = async () => {
+const getWeather = async () => {
     const cityName = document.querySelector(".city-name");
     const temperature = document.querySelector(".temperature");
     const currentTime = document.querySelector(".current-time");
@@ -12,16 +12,17 @@ const getWheather = async () => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=85d9877a19499d8c389f1fb40ddcbdb4`);
 
     if(response.ok){
-        let wheather = await response.json();
-        let currentTemperature = (wheather.main.temp -273.15).toFixed(1);
+        let weather = await response.json();
+        let currentTemperature = (weather.main.temp -273.15).toFixed(1);
+        changeBackground(weather)
 
         cityName.innerText = getCorrectCityName(currentCity);
         temperature.innerText = getCorrectTemperature(currentTemperature);
         currentTime.innerText = "Сейчас " + getCurrentTime();
 
-        wind.innerText = getCorrectWind(wheather.wind);
-        humidity.innerText = "Влажность: " + wheather.main.humidity + "%";
-        pressure.innerText = getCorrectPressure(wheather.main.pressure);
+        wind.innerText = getCorrectWind(weather.wind);
+        humidity.innerText = "Влажность: " + weather.main.humidity + "%";
+        pressure.innerText = getCorrectPressure(weather.main.pressure);
 
         localStorage.setItem("currentCity", currentCity);
 
@@ -77,17 +78,71 @@ const getCorrectPressure = (pressure) => {
     return "Давление: " + Math.round(pressure / 1.333) + " мм рт. ст."
 }
 
+const changeBackground = (weather) => {
+    console.log(weather.weather[0].main) // Убрать позже
+
+    const container = document.querySelector(".container");
+    switch (weather.weather[0].main) {
+        case "Clear":
+            container.style.background = "url('./img/Clear-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Clouds":
+            container.style.background = "url('./img/Clouds-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Rain":
+        case "Drizzle":    
+            container.style.background = "url('./img/Rain-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Snow":
+            container.style.background = "url('./img/Snow-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Thunderstorm":
+            container.style.background = "url('./img/Thunderstorm-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Mist":
+        case "Haze":
+        case "Fog":
+            container.style.background = "url('./img/Mist-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Smoke":
+            container.style.background = "url('./img/Smoke-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Dust":
+        case "Sand":
+        case "Ash":
+            container.style.background = "url('./img/Dust-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Squal":
+            container.style.background = "url('./img/Squal-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        case "Tornado":
+            container.style.background = "url('./img/Tornado-bg.jpg') no-repeat";
+            container.style.backgroundSize = "cover"
+            break;
+        default: break;
+    }
+}
+
 // Повесить функцию на событие "после полной загрузки документа"
-getWheather()
+getWeather()
 
 document.querySelector(".get-weather").addEventListener("click", () => {
     currentCity = document.querySelector(".city-input").value;
-    getWheather();
+    getWeather();
 })
 
 document.querySelector(".city-input").addEventListener("keydown", (e) => {
     if(e.keyCode === 13){
         currentCity = e.target.value;
-        getWheather();
+        getWeather();
     }
 })

@@ -9,13 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("./img/clouds-bg.jpg") no-repeat;
-    background-size: cover;
 }
 /* weather__show */
 .weather{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 20px;
     width: 50%;
     border-radius: 15px;
@@ -23,6 +21,7 @@
     
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
+/* current-weather__top */
 .temperature{
     font-size: 20px;
     font-weight: bold;
@@ -34,8 +33,16 @@
 .current-weather > div *{
     margin-right:  5px;
 }
-.wheather-icon{
+.weather-icon{
     width: 20px;
     height: 20px;
     filter: invert(100%);
+}
+/* current-weather__bottom */
+.current-weather__bottom{
+    display: flex;
+    flex-direction: column;
+}
+.current-weather__bottom > *{
+    margin-top: 5px;
 }
