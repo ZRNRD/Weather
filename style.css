@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+p{
+    font-size: 20px;
+}
+
 .container{
     width: 100vw;
     height: 100vh;
@@ -14,16 +18,17 @@
 .weather{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 0 20px;
     width: 50%;
     border-radius: 15px;
-    background-color: rgba(25, 0, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.5);
     
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
 /* current-weather__top */
 .temperature{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
 }
 .current-weather > div{
@@ -45,4 +50,20 @@
 }
 .current-weather__bottom > *{
     margin-top: 5px;
+}
+
+.weather__get{
+    display: flex;
+    flex-direction: column;
+}
+.weather__get > *{
+    margin-top: 5px;
+}
+
+/* Media */
+@media (max-width: 920px) {
+    .weather{
+        width: 90%;
+        height: 30%;
+    }
 }

@@ -14,8 +14,8 @@ const getWeather = async () => {
     if(response.ok){
         let weather = await response.json();
         let currentTemperature = (weather.main.temp -273.15).toFixed(1);
+        
         changeBackground(weather)
-
         cityName.innerText = getCorrectCityName(currentCity);
         temperature.innerText = getCorrectTemperature(currentTemperature);
         currentTime.innerText = "Сейчас " + getCurrentTime();
@@ -82,58 +82,72 @@ const changeBackground = (weather) => {
     console.log(weather.weather[0].main) // Убрать позже
 
     const container = document.querySelector(".container");
+    const description = document.querySelector(".description");
+
     switch (weather.weather[0].main) {
         case "Clear":
             container.style.background = "url('./img/Clear-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Чисто";
             break;
         case "Clouds":
             container.style.background = "url('./img/Clouds-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Облачно";
             break;
         case "Rain":
         case "Drizzle":    
             container.style.background = "url('./img/Rain-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Дождливо";
             break;
         case "Snow":
             container.style.background = "url('./img/Snow-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Снежно";
             break;
         case "Thunderstorm":
             container.style.background = "url('./img/Thunderstorm-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Гроза";
             break;
         case "Mist":
         case "Haze":
         case "Fog":
             container.style.background = "url('./img/Mist-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Туман";
             break;
         case "Smoke":
             container.style.background = "url('./img/Smoke-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Дым";
             break;
         case "Dust":
         case "Sand":
         case "Ash":
             container.style.background = "url('./img/Dust-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Пыль";
             break;
         case "Squal":
             container.style.background = "url('./img/Squal-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Шквал";
             break;
         case "Tornado":
             container.style.background = "url('./img/Tornado-bg.jpg') no-repeat";
             container.style.backgroundSize = "cover"
+            description.innerText = "Торнадо";
             break;
         default: break;
     }
 }
 
-// Повесить функцию на событие "после полной загрузки документа"
-getWeather()
+
+document.addEventListener("DOMContentLoaded", () => {
+    getWeather()
+});
 
 document.querySelector(".get-weather").addEventListener("click", () => {
     currentCity = document.querySelector(".city-input").value;
