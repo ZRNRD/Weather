@@ -57,6 +57,21 @@ p{
     margin-top: 5px;
 }
 
+.cities__list{
+    background-color: white;
+    margin: 0;
+    max-height: 85px;
+    list-style-type: none;
+    overflow-y: scroll;
+}
+.cities__list li{
+    padding: 5px;
+}
+.cities__list li:hover{
+    background-color: rgb(172, 172, 172);
+    cursor: pointer;
+}
+
 /* Media */
 @media (max-width: 920px) {
     .weather{
