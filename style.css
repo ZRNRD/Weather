@@ -39,11 +39,7 @@ p{
 .current-weather > div *{
     margin-right:  5px;
 }
-.weather-icon{
-    width: 20px;
-    height: 20px;
-    filter: invert(100%);
-}
+
 /* current-weather__bottom */
 .current-weather__bottom{
     display: flex;
