@@ -27,6 +27,7 @@ const getWeather = async () => {
         localStorage.setItem("currentCity", currentCity);
 
         document.querySelector(".city-input").value = "";
+        document.querySelector(".cities__list").innerHTML = "";
     }else{
         alert("Ошибка запроса погоды");
         document.querySelector(".city-input").value = "";
@@ -10175,11 +10176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelector(".get-weather").addEventListener("click", () => {
     currentCity = document.querySelector(".city-input").value;
     getWeather();
+    
 })
 
 document.querySelector(".city-input").addEventListener("keydown", (e) => {
-
-
     if(e.keyCode === 13){
         currentCity = e.target.value;
         getWeather();
@@ -10196,7 +10196,6 @@ document.querySelector(".city-input").addEventListener("keyup", (e) => {
             li.addEventListener("click", ()=>{
                 currentCity = city.city;
                 getWeather()
-                citiesList.innerHTML = "";
             })
             ul.append(li);
         })
