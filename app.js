@@ -31,6 +31,7 @@ const getWeather = async () => {
     }else{
         alert("Ошибка запроса погоды");
         document.querySelector(".city-input").value = "";
+        document.querySelector(".cities__list").innerHTML = "";
     }
 }
 
